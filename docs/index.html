@@ -11,7 +11,7 @@ span.smallcaps{font-variant: small-caps;}
 span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 				</style>
-				<link rel="stylesheet" href="SkinCancerConceptVectors/Preprint/css/base_style.css" />
+				<link rel="stylesheet" href="./css/base_style.css" />
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
 				<!--[if lt IE 9]>
 						<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
@@ -114,7 +114,7 @@ toggle.onclick = function() {
 						<h3 id="interpretable-diagnostic-systems">1.2 Interpretable Diagnostic Systems</h3>
 						<p>In developing these tools, it is important to consider what we really want from decision support systems. What are we directing them to learn, and what are we wanting them to do? In the context of histopathology, basal cell carcinoma (BCC) is the most common form of skin cancer (approx. 60% of all diagnoses<span class="citation" data-cites="Staples2006-kp"><sup><a href="#ref-Staples2006-kp">9</a></sup></span>). This disease manifests as varying-sized groupings of small purple cells under H&amp;E staining (<a href="#fig1">Fig. 1</a>). In many cases, a rule of “purple pixels” would enable a sufficiently accurate classification. However, in difficult cases, the morphology can overlap with other cancer types, such as intraepidermal carcinoma or basosquamous carcinoma. The “purple pixels” rule would fail to discriminate in those instances. We know why such a rule fails, and would understand why such a classifier could make that error. But ideally, we would like to train a system to effectively discriminate between those various cancer types. Indeed, it would be valuable, arguably necessary, to know the discriminatory features the system uses, just as a junior pathologist must learn them from a senior pathologist.</p>
 						<figure id="fig1">
-								<img src="./Preprint/assets/skin_layers.png">
+								<img src="./assets/skin_layers.png">
 								<figcaption>
 										<strong>Figure 1</strong>: The main tissue types found within the superficial layers of the skin. The keratin layer varies in thickness depending on the site of the specimen. It sits above the epidermis, which is the healthy epithelial tissue of the skin. It is supported by the papillary dermis, which provides elasticity and strength to skin, and contains vessels to nourish the epidermis. Within the dermal region areas of inflammation are common, often associated with disease states, such as basal cell carcinoma (BCC). BCC emerges from the basal layer of the epidermis, and grows down into the dermis.
 								</figcaption>
@@ -155,7 +155,7 @@ toggle.onclick = function() {
 								\]</span></p>
 						<p>A <span class="math inline">\(\lambda\)</span> constant denotes the weighting of the term in the loss.</p>
 						<figure id="fig2">
-								<img src="./Preprint/assets/network.png">
+								<img src="./assets/network.png">
 								<figcaption>
 										<strong>Figure 2:</strong> An ALAE network is composed of four networks in contrast to the traditional two for GAN training. The fully-connected <span class="math inline">\(F\)</span> network maps from the known distribution <span class="math inline">\(z\)</span> to a learned distribution <span class="math inline">\(w\)</span>. This feeds the generator network <span class="math inline">\(G\)</span>, to produce a fake image <span class="math inline">\(x\)</span>. The encoder network <span class="math inline">\(E\)</span> maps the image back to <span class="math inline">\(w&#39;\)</span>, which then feeds a fully-connected discriminator network <span class="math inline">\(D\)</span>. An additional autoencoding optimization step minimizes <span class="math inline">\(w\)</span> and <span class="math inline">\(w&#39;\)</span> where <span class="math inline">\(w&#39; = E(G(w)\)</span>. This results in stable adversarial training with the addition of being able to encode and decode real images via <span class="math inline">\(G(E(x))\)</span>.
 								</figcaption>
@@ -192,7 +192,7 @@ toggle.onclick = function() {
 						<h3 id="encoding-decoding-and-random-generation-of-images">3.1 Encoding, Decoding and Random Generation of Images</h3>
 						<p>Our style-based ALAE architecture successfully learned to both generate and reconstruct realistic images across a wide variety of tissue types and morphological contexts (<a href="#fig3">Fig. 3</a>). It can be seen that the network has modelled their natural variations across the full-range of orientations. In particular we can see several manifestations of BCC morphology, with natural variances in staining, as well as contexts of surrounding tissue. We also note subtle details such as blue ink <a href="#fig3">(Fig 3b, arrows)</a>, which is an orientation marker for the pathologist. Our best performing model achieved an FID score of 44 (<a href="#figA1">Fig. A1</a>), based on 10,000 randomly generated images. Although this would not always be considered a good FID score, visually these images appear to encode and reconstruct the general features of a diverse and complex image domain.</p>
 						<figure id="fig3">
-								<img src="./Preprint/assets/reconstructions_and_samples.png">
+								<img src="./assets/reconstructions_and_samples.png">
 								<figcaption>
 										<strong>Figure 3</strong>: Generated images from the ALAE network. <strong>a)</strong> Representative reconstructions for real images, <span class="math inline">\(G(E(x))\)</span>, show that the both global context of an image as well as relevant tissue type and features can be successfully generated. <strong>b)</strong> Random samples showcase a diverse set of images, <span class="math inline">\(G(F(z))\)</span> where <span class="math inline">\(z_i \sim N(0,1), 1 \le i \le 512\)</span>. The arrows in row 2, column 6 point to blue ink, an orientation marker for pathologists.
 								</figcaption>
@@ -205,7 +205,7 @@ toggle.onclick = function() {
 						<p>We further inspected the quality of the model by looking at 2D projections of the latent vectors of random samples. In <a href="#fig4">Fig. 4</a> below, we get an overview of how diverse the learned representation is, as well as an indication of the arrangement of the space. To do this we used 1,600 randomly sampled latent vectors and generated images. We used the UMAP algorithm<span class="citation" data-cites="McInnes2018"><sup><a href="#ref-McInnes2018">49</a></sup></span> to perform dimensionality reduction, alongside the Jonker-Volgenant algorithm<span class="citation" data-cites="jonker1987shortest markovtsevLapjvGitHubRepository2017"><sup><a href="#ref-jonker1987shortest">50</a>,<a href="#ref-markovtsevLapjvGitHubRepository2017">51</a></sup></span> to perform linear assignment. Across the 1,600 images, we recognize morphological and contextual similarities between image neighborhoods, all of which transition naturally within a continuous space. For example, BCC groups are based on staining color (a range of light to dark purples) and tissue proportion, as well as proximity to either the epidermis or papillary dermis. Importantly, there is no evidence of mode collapse, or even repetition of features.</p>
 						<p>An obvious pattern in <a href="#fig4">Fig. 4</a> is seen in the space being arranged according to the angle of the tissue with the background. This is also recognizable in the case of the location of BCC in the surrounding dermal tissue. This is an important observation, telling us that images which are essentially rotations of each other are assigned to different locations within the space (see Section 3.8-9 for further discussion). To improve our ability to inspect the model, we return to this mode of inspection in 2D space in Section 3.5 by utilizing concept vectors. This greatly simplified the process as well as provides further insight into the quality of the model.</p>
 						<figure id="fig4">
-								<img src="./Preprint/assets/samples_2D_grid.jpg">
+								<img src="./assets/samples_2D_grid.jpg">
 								<figcaption>
 										<strong>Figure 4</strong>: 1,600 random samples arranged via UMAP dimensionality reduction and linearly assigned to a square space using the Jonker-Volgenant algorithm. The x and y axes constitute dimensions 1 and 2 of the UMAP output. This showcases the diversity of images that can be generated as well as gives some insight into how the latent space is arranged.
 								</figcaption>
@@ -298,7 +298,7 @@ toggle.onclick = function() {
 						<p>Using the coefficients and intercept from the classifier, we measured the scalar projection of all positive and negative concept images onto the six concept vectors. The distributions of the scores are shown in <a href="#fig5">Fig. 5a</a>, demonstrating how the concept vector is able to effectively separate the image groups. We note that the overlap in the INF distribution corresponds to the lower classification performance seen in <a href="#table1">Table 1</a>. This could in part be due to the overlap in features between inflammation, papillary dermis and BCC. For example, INF and BCC often co-occur, yet BCC can also be seen with PAP, with no INF present. The biological context makes it likely that the INF concept vector is associated with BCC (see below and Section 3.3).</p>
 						<p>We present in <a href="#fig5">Fig. 5b</a> conceptual summaries of patches containing various combinations of tissue types. The scalar projections of the latent vector onto the six concept vectors provide good characterisations of the image. Scores below 0 indicate a probability less than 50% for the presence of the concept in at least 20% of the image. The positive scores correspond to the presence of the concept in at least 20% of the image. We measured whether the score correlates with the proportion of tissue (<a href="#figA3">Fig. A3</a>), and found strong correlations for BCC (0.88), EPI (0.79), KER(0.86), BKG (0.91) and PAP (0.72). We observed that INF(0.59) scored lower and also had a positive correlation with BCC(0.33), affirming our biological intuition.</p>
 						<figure id="fig5">
-								<img src="./Preprint/assets/Distributions_Concept_Patch_Measures.png">
+								<img src="./assets/Distributions_Concept_Patch_Measures.png">
 								<figcaption>
 										<strong>Figure 5</strong>: Using scalar projections to characterize tissue in image patches. <strong>a)</strong> The distributions of scores for positive and negative concept images for each class. The scores are normalized between -1 and 1, where &gt;0 is positive for the concept. <strong>b)</strong> Individual images with scores for all six concepts provides a way to give a conceptual summary of the image. As shown, multiple concepts can be present in the same image. Scores less than 0 indicate a less than 50% chance of the concept being present in at least 20% of the image.
 								</figcaption>
@@ -306,7 +306,7 @@ toggle.onclick = function() {
 						<h3 id="latent-space-structure">3.5 Latent Space Structure</h3>
 						<p>We utilized the ability to score images in terms of concepts to return to the problem of understanding the latent space. In <a href="#fig6">Fig. 6</a>, we show UMAP dimensionality reductions for 10,000 latent vectors from the training images. We then labeled each point as a color gradient mapped from the score for each concept. Interestingly, the figure shows that the concepts are arranged in the space in a similar way to their biological context. It can be seen that BKG, KER and EPI are located next to or co-locating with each other. Similarly, EPI and PAP are highly correlated and PAP transitions towards INF and BCC. This corresponds to the image domain where these tissue types adjoin as seen in <a href="#fig1">Fig. 1</a>. Therefore, these maps reveal a conceptual landscape which aligns with our biological expectations.</p>
 						<figure id="fig6">
-								<img src="./Preprint/assets/UMAP_concept_projections.png">
+								<img src="./assets/UMAP_concept_projections.png">
 								<figcaption>
 										<strong>Figure 6</strong>: UMAP projections of 10,000 latent vectors from the training data. This indicates the space is organized in a biological meaningful way, where adjoining tissue types are closely located in the space. It also indicates that spatial orientation of tissue within the patch is an important factor.
 								</figcaption>
@@ -314,7 +314,7 @@ toggle.onclick = function() {
 						<h3 id="whole-image-characterization">3.6 Whole-Image Characterization</h3>
 						<p>We next applied concept summaries to the whole-image context. Whole-images present the full tissue specimen, including regions of tissues that the network was not trained on. In a sliding window fashion (step size of 32×32) we generated a latent vector for a 128×128 patch and then saved the score for all six concept vectors to produce a multi-dimensional heat map. We then set a threshold for positive scores revealing which parts of the specimen contain each concept (<a href="#fig7">Fig. 7</a>). This was performed on whole images of varying sizes, including punch, shave and excision biopsies (<a href="#fig7">Fig. 7a &amp; 7b</a>). Qualitatively we see that the relevant tissue types have been outlined or segmented by the concept scores. High EPI scores occur along the epidermis, as does KER over keratin regions. INF is seen to surround the BCC regions, and BKG has identified the perimeter of the specimen. This is consistent with our observations in <a href="#fig6">Fig. 6</a>. As an interesting side note, the heat maps also indicate that the inclusion of tissue regions that were not in the training data (below the superficial layers) did not adversely affect the visualisations, with mostly negative or mildly positive scores for all concepts.</p>
 						<figure id="fig7">
-								<img src="./Preprint/assets/whole_image_concepts.png">
+								<img src="./assets/whole_image_concepts.png">
 								<figcaption>
 										<strong>Figure 7</strong>: Conceptual summaries of whole-tissue images for shave, punch and excision biopsy specimens. The grey bar designates 1mm distance. All maps indicate positive concept scores &gt; 0 <strong>a)</strong> High-level overview of concept summaries for a variety of specimen types showing that the concept summaries highlight quite well the relevant tissue regions. <strong>b)</strong> A finer resolution example of an excision specimen where the concept scores provide accurate summaries of the tissue regions. Best viewed in color.
 								</figcaption>
@@ -325,7 +325,7 @@ toggle.onclick = function() {
 						<p>For this we come to a surprising conclusion; not nearly as many as traditionally required for image classification tasks. <a href="#fig8">Fig. 8</a> shows the overall accuracy after training classifiers on a range of training dataset sizes. The performance metrics shown in <a href="#table2">Table 2</a> are from the models trained on the full dataset, approximately 10<sup>4</sup> images. In <a href="#fig8">Fig. 8</a> it can be seen that with 10<sup>3</sup> images, performance is maintained, and with 10<sup>2</sup> images, performance only drops by approximately 5%. For more obvious classes, such as BKG, 10 images each of positive and negative examples keeps performance at 90%. In practice, this may translate to only needing 100-500 labels of each class which is easily achievable.</p>
 						<p>We propose that the small number of labels is possible because the network has already learned the image domain by training on a large body of unlabeled data. The subsequent use of labels is just a means for people to understand and interact with the knowledge instantiated in the network. Because only a small number of labels is needed, yet classification is high, we interpret this as further evidence for the usefulness of features for both generation and classification tasks.</p>
 						<figure id="fig8">
-								<img src="./Preprint/assets/minimal_concept_vectors.png">
+								<img src="./assets/minimal_concept_vectors.png">
 								<figcaption>
 										<strong>Figure 8</strong>: Concept vector accuracies for decreasing numbers of training data. Performance decreases non-linearly with training set size, indicating that substantially smaller numbers of labels can be utilized without compromising accuracy. This means that performing classification after training an unsupervised generative model may be much less laborious. Best viewed in color.
 								</figcaption>
@@ -333,7 +333,7 @@ toggle.onclick = function() {
 						<h3 id="latent-space-complexity">3.8 Latent Space Complexity</h3>
 						<p>In Section 1.8, the use of interpolating points through the latent space was introduced as an interpretability tool. Previous works show that interpolations between images of faces tend to follow natural journeys, where the in-between faces have similarities to both pairs and link semantically<span class="citation" data-cites="Karras2019 pidhorskyi2020adversarial"><sup><a href="#ref-Karras2019">27</a>,<a href="#ref-pidhorskyi2020adversarial">29</a></sup></span>. However, in the case of histology images, the meaning of intermediate images remains elusive. In <a href="#fig9">Fig. 9</a> we show some example interpolations where there is no clear reason why the intermediate images are what they are. An obvious example is in the last row, where the intermediate image between healthy epidermis and papillary dermis is inflammation with some BCC. This does not make sense in the context of histology. In fact, the endpoint images are almost rotations by 90 degrees. A realistic journey might thus rotate the image, not firstly traverse regions of unrelated tissue types. Indeed, this appears to be a problem for breast cancer images as well<span class="citation" data-cites="Quiros2020"><sup><a href="#ref-Quiros2020">36</a></sup></span>.</p>
 						<figure id="fig9">
-								<img src="./Preprint/assets/interpolations.png">
+								<img src="./assets/interpolations.png">
 								<figcaption>
 										<strong>Figure 9</strong>: Linear interpolations between images pairs in the latent space results in unrealistic journeys, where intermediate images are realistic but have no obvious connection to the endpoints.<span class="math inline">\(\alpha\)</span> is the blend between latent vectors, where the intermediate image is generated from <span class="math inline">\(w_I = \alpha w_1 + (1-\alpha)w_2\)</span>.
 								</figcaption>
@@ -450,19 +450,19 @@ toggle.onclick = function() {
 								</table>
 						</figure>
 						<figure id="figA1">
-								<img src="./Preprint/assets/FID_Plot.png">
+								<img src="./assets/FID_Plot.png">
 								<figcaption>
 										<strong>Figure A1</strong>: FID scores for the best model across the final 300 epochs of training. The EMA is presented only to aid the eye. The best FID score was 44, marked with the dotted line.
 								</figcaption>
 						</figure>
 						<figure id="figA2">
-								<img src="./Preprint/assets/training_curves.png">
+								<img src="./assets/training_curves.png">
 								<figcaption>
 										<strong>Figure A2</strong>: Training curves for our best ALAE network. The adversarial loss components remain stable across all epochs. The gradient penalty converges once reaching full-scale (128×128). The reconstruction error steadily increases over the course of training, perhaps due to the improving quality of the generated images.
 								</figcaption>
 						</figure>
 						<figure id="figA3">
-								<img src="./Preprint/assets/correlation_matrix_dark.png">
+								<img src="./assets/correlation_matrix_dark.png">
 								<figcaption>
 										<strong>Figure A3</strong>: Spearman Rank Correlation matrix for concept scores against the respective tissue proportion for an image. Scores tend to have strong positive correlations with their tissue proportion. Also, positive correlations are seen for associated classes, such as PAP, EPI, KER and BKG, as well as BCC and INF.
 								</figcaption>
