@@ -1,0 +1,28 @@
+# CONFIG FILE FOR bcc_epi_256 dataset - grown to 128x128
+
+# MODEL HYPER-PARAMETERS
+# filters is ordered such that [ E_in , E/G Filters]
+levels: 5
+resume_level: 2
+base_features: 512
+filters: { 1: [ 64, 64 ],
+           2: [ 64, 64 ],
+           3: [ 64, 64 ],
+           4: [ 32, 64 ],
+           5: [ 16, 32 ]}
+block_type: "AdaIn"
+z_dim: 128
+F_layers: 8
+D_layers: 3
+batch_sizes: [ 32, 32, 32, 16, 16, 8 ]
+gammas: [ 0.1, 0.1, 0.1, 0.1, 0.1, 0.1 ]
+alpha: 0.0010
+n: 22_183
+k_images: 400_000
+
+# I/O
+data_dir: "/home/simon/Documents/Programming/Data/HistoALAE/Cancer_128x128/SCC"
+run_dir: "/home/simon/PycharmProjects/StyleALAE/SCC_64"
+
+
+
