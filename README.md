@@ -6,7 +6,9 @@
 
 <center>
 
-**Official repository of the paper**
+
+[**Print Print**](https://smthomas-sci.github.io/Preprints/SkinCancerConceptVectors/)
+
 
 </center>
 
@@ -42,9 +44,6 @@ tissues types within a patch. This can be extended to generate multi-dimensional
 heat maps for whole-image specimens, which characterizes the tissue in a similar
 way to a pathologist. We additionally find that accurate concept vectors can be
 defined using a small labeled dataset.
-
-
-Print Print available [here]()
 
 
 
