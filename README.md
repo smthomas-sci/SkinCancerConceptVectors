@@ -7,7 +7,7 @@
 <center>
 
 
-[**Print Print**](https://smthomas-sci.github.io/Preprints/SkinCancerConceptVectors/)
+**[Print Print](https://smthomas-sci.github.io/Preprints/SkinCancerConceptVectors/)**
 
 
 </center>
