@@ -1,13 +1,13 @@
 <center>
  
- # [In Review] Characterization of Tissue Types in Basal Cell Carcinoma Images via Generative Modelling and Concept Vectors
+ # Characterization of Tissue Types in Basal Cell Carcinoma Images via Generative Modelling and Concept Vectors
  
  </center>
 
 <center>
 
 
-**[Print Print](https://smthomas-sci.github.io/Preprints/SkinCancerConceptVectors/)**
+**[Publication](https://www.sciencedirect.com/science/article/pii/S0895611121001476)**
 
 
 </center>
